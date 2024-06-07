@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knapsack Problem Solver</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://miro.medium.com/v2/resize:fit:1400/1*4b1qYRRYPnPvOhT5UIYP1g.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Set minimum height of the viewport */
+        }
+        .container {
+            width: 80%; /* Adjust the width as needed */
+            padding: 20px;
+            background-color: rgba(230, 247, 234, 0.8); /* Light green background color */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input, select {
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #ffffff; /* White background color for result */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .graph {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Knapsack Problem Solver</h1>
+        <form action="/solve" method="post">
+            <label for="weights">Weights (comma separated):</label>
+            <input type="text" id="weights" name="weights" required>
+
+            <label for="values">Values (comma separated):</label>
+            <input type="text" id="values" name="values" required>
+
+            <label for="max_weight">Max Weight:</label>
+            <input type="number" id="max_weight" name="max_weight" required>
+
+            <label for="algorithm">Algorithm:</label>
+            <select id="algorithm" name="algorithm">
+                <option value="dpBottomUp">Dynamic Programming (Bottom-Up)</option>
+                <option value="dpTopDown">Dynamic Programming (Top-Down)</option>
+                <option value="bruteForce">Brute Force</option>
+                <option value="greedy">Greedy</option>
+            </select>
+
+            <input type="hidden" name="generate_graph" value="true">
+            <button type="submit">Solve</button>
+        </form>
+        {% if result %}
+        <div class="result">
+            <h2> {{ result }}</h2>
+        </div>
+        {% endif %}
+
+        {% if graph_url %}
+        <div class="graph">
+            <h2>Performance Graph</h2>
+            <img src="{{ graph_url }}" alt="Performance Graph">
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
